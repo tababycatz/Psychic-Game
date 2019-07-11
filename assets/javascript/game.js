@@ -5,56 +5,39 @@ var remainingGuess = 10;
 var theChosenLetter = "";
 var guessedLetter = [];
 
-resetGame();
-display();
+var startIntro = document.getElementById("startIntro");
+var winNumber = document.getElementById("winCount");
+var lossNumber = document.getElementById("lossCount");
+var guessRemaining = document.getElementById("remainingGuess");
+var letterTyped = document.getElementById('Your Guessed Letters' + "guessedLetter");
+
 
 document.onkeyup = function (event) {
-    var guess = event.key;
-    if (guess === theChosenLetter) {
-        win();
+    var userGuess = event.key;
+
+    theChosenLetter = letters[Math.floor(Math.random() * letters.length)];
+
+    if (userGuess === theChosenLetter) {
+        win++;
     } else if (remainingGuess - 1 === 0) {
-        lose();
-    } else {
-        fail(guess);
-    }
-
-    display();
-}
-
-function display() {
-    var winNumber = document.getElementById("win");
-    var lossNumber = document.getElementById("loss");
-    var guessRemaining = document.getElementById("remaining");
-    var letterTyped = document.getElementById("guessed")
-    winNumber.innerHTML = win;
-    lossNumber.innerHTML = loss;
-    guessRemaining.innerHTML = remainingGuess;
-    letterTyped.innerHTML = guessedLetter.join(',');
-}
+        lose++;
+    } 
+    
+    // else {
+        // retry(guess);
+    // }
 
 
-function win() {
-    win++;
-    resetGame();
-}
+letterTyped.textContent = letterTyped + ",";
+winNumber.textContent = win;
+lossNumber.textContent = lose;
 
-function lose() {
-    loss++;
-    resetGame();
-}
 
-function fail(letter) {
-    remainingGuess--;
-    guessedLetter.push(letter);
-}
+};
+
 
 function resetGame() {
     guessRemaining = 10;
     guessedLetter = [];
-    theChosenLetter =  letters[Math.floor(Math.random() * letters.length)];
-
-    console.log(" Random letter" + theChosenLetter);
-    
-}
-
-
+   
+};
