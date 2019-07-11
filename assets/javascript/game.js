@@ -1,43 +1,68 @@
 var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 var winCount = 0;
 var lossCount = 0;
-var remainingGuess = 10;
+var guessLeft = 10;
 var theChosenLetter = "";
 var guessedLetter = [];
-
-var startIntro = document.getElementById("startIntro");
-var winNumber = document.getElementById("winCount");
-var lossNumber = document.getElementById("lossCount");
-var guessRemaining = document.getElementById("remainingGuess");
-var letterTyped = document.getElementById('Your Guessed Letters' + "guessedLetter");
+var started = false;
 
 
-document.onkeyup = function (event) {
-    var userGuess = event.key;
-
-    theChosenLetter = letters[Math.floor(Math.random() * letters.length)];
-
-    if (userGuess === theChosenLetter) {
-        win++;
-    } else if (remainingGuess - 1 === 0) {
-        lose++;
-    } 
-    
-    // else {
-        // retry(guess);
-    // }
-
-
-letterTyped.textContent = letterTyped + ",";
-winNumber.textContent = win;
-lossNumber.textContent = lose;
-
-
-};
-
+var lossNumber = document.getElementById("#lossCount");
+var guessRemaining = document.getElementById("#remainingGuess");
+var letterTyped;
+var winNumber;
 
 function resetGame() {
-    guessRemaining = 10;
+    started = true;
+    letterTyped = document.getElementById("#guessedLetter");
+    winNumber = document.getElementById("#winCount");
+    
+    guessLeft = 10;
     guessedLetter = [];
-   
+    theChosenLetter = letters[Math.floor(Math.random() * letters.length)];
+    
 };
+
+document.onkeyup = function (event) {
+    if(!started){
+        resetGame();
+    }
+    winCount;
+    lossCount;
+    remainingGuess;
+    var userGuess = event.key;
+    console.log("UserGuess : ", userGuess)
+
+    function updateText(){
+        lossNumber.textContent = ("Losses: " + lossCount);
+        remainingGuess.textContent = "Gueses Left: " + guessLeft;
+    }
+
+    console.log("Chosen Letter:", theChosenLetter);
+
+    if (userGuess === theChosenLetter) {
+        winCount++;
+        winNumber.textContent = "Wins: " + winCount;
+        resetGame();
+        console.log(winNumber)
+    }
+
+    if (userGuess != theChosenLetter && guessLeft > 0) {
+        guessLeft--;
+        guessedLetter.push(userGuess);
+
+    }
+        
+
+     else if(guessLeft === 0){
+            lossCount++;
+           
+            resetGame();
+     }
+    
+
+        updateText();
+};
+
+
+resetGame()
