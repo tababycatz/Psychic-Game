@@ -1,0 +1,23 @@
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: lightpink;
+}
+
+h2 {
+    color: grey;
+    text-align: center;
+    padding: 40px 40px 40px 40px;
+}
+
+p {
+    text-align: center;
+    padding: 20px 20px 20px 20px;
+    color: grey;
+}
+
+.jumbotron {
+    text-align: center;
+    background-color: lavender;
+    color: grey;
+    font-family: 'Mountains of Christmas', cursive;
+}
