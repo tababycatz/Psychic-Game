@@ -7,6 +7,7 @@ var guessedLetter = [];
 var started = false;
 
 
+var guessDiv = document.getElementById("guessedLetter");
 var lossNumber = document.getElementById("lossCount");
 var guessRemaining = document.getElementById("remainingGuess");
 var letterTyped;
@@ -43,7 +44,13 @@ document.onkeyup = function (event) {
         winNumber.textContent = "Wins: " + winCount;
         resetGame();
         console.log(winNumber)
+    } 
+
+
+    if( userGuess != theChosenLetter ){
+        guessDiv.innerHTML = guessedLetter.join(" ");
     }
+    
     
     if (userGuess != theChosenLetter && guessLeft > 0) {
         guessLeft--;
@@ -60,7 +67,8 @@ document.onkeyup = function (event) {
     
     function updateText(){
         lossNumber.textContent = ("Losses: " + lossCount);
-        remainingGuess.textContent = "Guesses Left: " + guessLeft;
+        remainingGuess.textContent = ("Guesses Left: " + guessLeft);
+    
         
     }
 
